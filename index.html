@@ -301,6 +301,80 @@
                 max-width: 300px;
             }
         }
+
+        .surprise-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .surprise-modal.active {
+            display: flex;
+        }
+
+        .surprise-content {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 60px 80px;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            text-align: center;
+            animation: bounceIn 0.8s ease-out;
+            position: relative;
+        }
+
+        .surprise-content h2 {
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin: 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        .close-surprise {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .close-surprise:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
     </style>
 </head>
 <body>
@@ -319,6 +393,7 @@
             <div class="hero-buttons">
                 <a href="#features" class="btn btn-primary">Explore Features</a>
                 <a href="https://github.com" class="btn btn-secondary">View on GitHub</a>
+                <button class="btn btn-secondary" onclick="showSurprise()">Surprise</button>
             </div>
         </header>
 
@@ -389,6 +464,13 @@
         </footer>
     </div>
 
+    <div class="surprise-modal" id="surpriseModal">
+        <div class="surprise-content">
+            <button class="close-surprise" onclick="closeSurprise()">×</button>
+            <h2>Hello Belgin! 🎉</h2>
+        </div>
+    </div>
+
     <script>
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -416,6 +498,22 @@
                 const y = (mouseY * speed) - (speed / 2);
                 shape.style.transform = `translate(${x}px, ${y}px)`;
             });
+        });
+
+        // Surprise modal functions
+        function showSurprise() {
+            document.getElementById('surpriseModal').classList.add('active');
+        }
+
+        function closeSurprise() {
+            document.getElementById('surpriseModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('surpriseModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSurprise();
+            }
         });
     </script>
 </body>
