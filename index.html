@@ -1002,57 +1002,72 @@
     <section id="pricing">
         <div class="container">
             <h2 class="section-title">Business Central Pricing</h2>
-            <p class="section-subtitle">Flexible licensing options to fit your business needs and budget</p>
+            <p class="section-subtitle">Choose the edition that fits your business needs</p>
 
-            <div class="pricing-grid">
+            <div class="pricing-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto;">
+                <!-- Business Central Essentials -->
                 <div class="pricing-card">
-                    <h3>Monthly</h3>
-                    <p class="billing-period">Pay as you go flexibility</p>
-                    <div class="price">$100</div>
-                    <p class="price-note">per user / month</p>
-                    <ul class="pricing-features">
-                        <li>✓ Full Business Central access</li>
-                        <li>✓ Cloud-based solution</li>
-                        <li>✓ Automatic updates</li>
-                        <li>✓ Standard support</li>
-                        <li>✓ Cancel anytime</li>
+                    <h3>Business Central Essentials</h3>
+                    <p class="billing-period">Core ERP functionality for most businesses</p>
+                    <ul class="pricing-features" style="margin-bottom: 20px;">
+                        <li>✓ Financial Management</li>
+                        <li>✓ Sales & Marketing</li>
+                        <li>✓ Purchasing & Payables</li>
+                        <li>✓ Inventory Management</li>
+                        <li>✓ Assembly Management</li>
+                        <li>✓ Project Management</li>
+                        <li>✓ Warehouse Management</li>
                     </ul>
-                    <a href="#order-form" class="pricing-cta" onclick="selectPlan('Monthly')">Get Started</a>
+                    <div style="background: #f8fafc; border-radius: 15px; padding: 20px; margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e2e8f0;">
+                            <span><strong>Monthly</strong></span>
+                            <span><strong>$130.20</strong>/user/mo</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e2e8f0;">
+                            <span><strong>Annual</strong></span>
+                            <span><strong>$1,302.00</strong>/user/yr</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                            <span><strong>Triennial</strong></span>
+                            <span><strong>$1,302.00</strong>/user/yr<br><small style="color: #666;">3-year price protection</small></span>
+                        </div>
+                    </div>
+                    <a href="#order-form" class="pricing-cta" style="margin-top: 25px;" onclick="selectPlan('Essentials')">Get Started</a>
                 </div>
 
+                <!-- Business Central Premium -->
                 <div class="pricing-card featured">
-                    <div class="pricing-badge">Best Value</div>
-                    <h3>Annual</h3>
-                    <p class="billing-period">Save with yearly commitment</p>
-                    <div class="price">$85</div>
-                    <p class="price-note">per user / month (billed annually)</p>
-                    <ul class="pricing-features">
-                        <li>✓ Full Business Central access</li>
-                        <li>✓ Cloud-based solution</li>
-                        <li>✓ Automatic updates</li>
-                        <li>✓ Priority support</li>
-                        <li>✓ 15% savings vs monthly</li>
+                    <div class="pricing-badge">Full Features</div>
+                    <h3>Business Central Premium</h3>
+                    <p class="billing-period">Everything in Essentials, plus Manufacturing & Service</p>
+                    <ul class="pricing-features" style="margin-bottom: 20px;">
+                        <li>✓ All Essentials features</li>
+                        <li>✓ Manufacturing Management</li>
+                        <li>✓ Production Orders</li>
+                        <li>✓ Capacity Planning</li>
+                        <li>✓ Service Management</li>
+                        <li>✓ Service Contracts</li>
+                        <li>✓ Repairs & Maintenance</li>
                     </ul>
-                    <a href="#order-form" class="pricing-cta" onclick="selectPlan('Annual')">Get Started</a>
-                </div>
-
-                <div class="pricing-card">
-                    <h3>Triennial</h3>
-                    <p class="billing-period">Maximum savings with 3-year term</p>
-                    <div class="price">$70</div>
-                    <p class="price-note">per user / month (billed triennially)</p>
-                    <ul class="pricing-features">
-                        <li>✓ Full Business Central access</li>
-                        <li>✓ Cloud-based solution</li>
-                        <li>✓ Automatic updates</li>
-                        <li>✓ Premium support</li>
-                        <li>✓ 30% savings vs monthly</li>
-                    </ul>
-                    <a href="#order-form" class="pricing-cta" onclick="selectPlan('Triennial')">Get Started</a>
+                    <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <span><strong>Monthly</strong></span>
+                            <span><strong>$179.04</strong>/user/mo</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <span><strong>Annual</strong></span>
+                            <span><strong>$1,790.40</strong>/user/yr</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                            <span><strong>Triennial</strong></span>
+                            <span><strong>$1,790.40</strong>/user/yr<br><small style="opacity: 0.8;">3-year price protection</small></span>
+                        </div>
+                    </div>
+                    <a href="#order-form" class="pricing-cta" style="margin-top: 25px;" onclick="selectPlan('Premium')">Get Started</a>
                 </div>
             </div>
 
-            <p class="pricing-note">* Pricing shown is illustrative. Contact us for accurate, up-to-date pricing tailored to your specific requirements.</p>
+            <p class="pricing-note">* All users in your organization must have the same license type (Essentials or Premium). Triennial commitment locks in pricing for 3 years, protecting against future price increases.</p>
 
             <!-- Order Form -->
             <div class="order-form-container" id="order-form">
@@ -1077,12 +1092,20 @@
                             <input type="tel" id="order-phone" name="phone">
                         </div>
                         <div class="form-group">
-                            <label for="order-plan">Billing Plan *</label>
+                            <label for="order-edition">Edition *</label>
+                            <select id="order-edition" name="edition" required>
+                                <option value="">Select an edition...</option>
+                                <option value="Essentials">Business Central Essentials</option>
+                                <option value="Premium">Business Central Premium</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-plan">Billing Term *</label>
                             <select id="order-plan" name="plan" required>
-                                <option value="">Select a plan...</option>
+                                <option value="">Select billing term...</option>
                                 <option value="Monthly">Monthly</option>
-                                <option value="Annual">Annual (15% savings)</option>
-                                <option value="Triennial">Triennial (30% savings)</option>
+                                <option value="Annual">Annual Commitment</option>
+                                <option value="Triennial">Triennial (3-Year Price Protection)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1203,10 +1226,10 @@
         </div>
     </footer>
     <script>
-        // Pre-select plan when clicking pricing card buttons
-        function selectPlan(plan) {
+        // Pre-select edition when clicking pricing card buttons
+        function selectPlan(edition) {
             setTimeout(() => {
-                document.getElementById('order-plan').value = plan;
+                document.getElementById('order-edition').value = edition;
             }, 100);
         }
 
@@ -1216,6 +1239,7 @@
             const email = document.getElementById('order-email').value;
             const company = document.getElementById('order-company').value;
             const phone = document.getElementById('order-phone').value;
+            const edition = document.getElementById('order-edition').value;
             const plan = document.getElementById('order-plan').value;
             const users = document.getElementById('order-users').value;
             const notes = document.getElementById('order-notes').value;
@@ -1232,7 +1256,8 @@ Phone: ${phone || 'Not provided'}
 
 Order Details:
 --------------
-Billing Plan: ${plan}
+Edition: Business Central ${edition}
+Billing Term: ${plan}
 Number of Users: ${users}
 
 Additional Notes:
