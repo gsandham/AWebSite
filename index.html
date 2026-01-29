@@ -702,6 +702,58 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
+        /* Honeypot - Hidden from humans, visible to bots */
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            opacity: 0;
+            height: 0;
+            width: 0;
+            z-index: -1;
+        }
+
+        /* CAPTCHA styling */
+        .captcha-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .captcha-question {
+            background: linear-gradient(135deg, #1a365d, #0078d4);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .captcha-input {
+            width: 100px !important;
+            text-align: center;
+            font-size: 1.2rem !important;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
         /* Footer */
         footer {
             background: #1a365d;
@@ -1073,7 +1125,13 @@
             <div class="order-form-container" id="order-form">
                 <h3>Request Your Licenses</h3>
                 <p>Fill out the form below and we'll get back to you with a quote and next steps.</p>
-                <form class="order-form" action="mailto:gsandham@sandhamadams.com" method="post" enctype="text/plain" onsubmit="return prepareOrderEmail()">
+                <form class="order-form" action="mailto:gsandham@sandhamadams.com" method="post" enctype="text/plain" onsubmit="return validateAndSubmitOrder()">
+                    <div id="order-error" class="error-message"></div>
+                    <!-- Honeypot field - hidden from humans -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="order-website">Website</label>
+                        <input type="text" id="order-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="order-form-grid">
                         <div class="form-group">
                             <label for="order-name">Your Name *</label>
@@ -1116,6 +1174,14 @@
                     <div class="form-group">
                         <label for="order-notes">Additional Notes</label>
                         <textarea id="order-notes" name="notes" placeholder="Any specific requirements or questions..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-captcha">Security Check *</label>
+                        <div class="captcha-group">
+                            <span id="order-captcha-question" class="captcha-question"></span>
+                            <span>=</span>
+                            <input type="text" id="order-captcha" name="captcha" class="captcha-input" required placeholder="?" autocomplete="off">
+                        </div>
                     </div>
                     <button type="submit" class="order-submit">Submit Order Request</button>
                 </form>
@@ -1170,7 +1236,13 @@
                 </div>
 
                 <div class="contact-form">
-                    <form action="mailto:gsandham@sandhamadams.com" method="post" enctype="text/plain">
+                    <form action="mailto:gsandham@sandhamadams.com" method="post" enctype="text/plain" onsubmit="return validateAndSubmitContact()">
+                        <div id="contact-error" class="error-message"></div>
+                        <!-- Honeypot field - hidden from humans -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="contact-website">Website</label>
+                            <input type="text" id="contact-website" name="contact_website" tabindex="-1" autocomplete="off">
+                        </div>
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1186,6 +1258,14 @@
                         <div class="form-group">
                             <label for="message">Message</label>
                             <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-captcha">Security Check *</label>
+                            <div class="captcha-group">
+                                <span id="contact-captcha-question" class="captcha-question"></span>
+                                <span>=</span>
+                                <input type="text" id="contact-captcha" name="captcha" class="captcha-input" required placeholder="?" autocomplete="off">
+                            </div>
                         </div>
                         <button type="submit" class="form-submit">Send Message</button>
                     </form>
@@ -1226,6 +1306,92 @@
         </div>
     </footer>
     <script>
+        // Bot protection - track page load time
+        const pageLoadTime = Date.now();
+        const MIN_FORM_TIME = 3000; // Minimum 3 seconds to fill form (bots are instant)
+
+        // CAPTCHA data
+        let orderCaptchaAnswer = 0;
+        let contactCaptchaAnswer = 0;
+
+        // Generate random math CAPTCHA
+        function generateCaptcha(questionElementId) {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            const operators = ['+', '-', 'x'];
+            const operator = operators[Math.floor(Math.random() * operators.length)];
+
+            let answer;
+            let displayOp = operator;
+            switch(operator) {
+                case '+': answer = num1 + num2; break;
+                case '-': answer = Math.max(num1, num2) - Math.min(num1, num2); break;
+                case 'x': answer = num1 * num2; break;
+            }
+
+            const question = operator === '-'
+                ? `${Math.max(num1, num2)} ${displayOp} ${Math.min(num1, num2)}`
+                : `${num1} ${displayOp} ${num2}`;
+
+            document.getElementById(questionElementId).textContent = question;
+            return answer;
+        }
+
+        // Initialize CAPTCHAs on page load
+        function initCaptchas() {
+            orderCaptchaAnswer = generateCaptcha('order-captcha-question');
+            contactCaptchaAnswer = generateCaptcha('contact-captcha-question');
+        }
+
+        // Show error message
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Hide error message
+        function hideError(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        // Validate bot protection (honeypot + time + captcha)
+        function validateBotProtection(honeypotId, captchaId, captchaAnswer, errorId) {
+            // Check honeypot (bots fill this in, humans don't see it)
+            const honeypot = document.getElementById(honeypotId);
+            if (honeypot && honeypot.value !== '') {
+                console.log('Bot detected: honeypot filled');
+                showError(errorId, 'Form submission failed. Please try again.');
+                return false;
+            }
+
+            // Check time (bots submit instantly)
+            const timeSpent = Date.now() - pageLoadTime;
+            if (timeSpent < MIN_FORM_TIME) {
+                console.log('Bot detected: too fast');
+                showError(errorId, 'Please take a moment to fill out the form completely.');
+                return false;
+            }
+
+            // Check CAPTCHA
+            const userAnswer = parseInt(document.getElementById(captchaId).value, 10);
+            if (isNaN(userAnswer) || userAnswer !== captchaAnswer) {
+                showError(errorId, 'Incorrect security answer. Please solve the math problem.');
+                // Regenerate CAPTCHA
+                if (captchaId === 'order-captcha') {
+                    orderCaptchaAnswer = generateCaptcha('order-captcha-question');
+                } else {
+                    contactCaptchaAnswer = generateCaptcha('contact-captcha-question');
+                }
+                document.getElementById(captchaId).value = '';
+                return false;
+            }
+
+            hideError(errorId);
+            return true;
+        }
+
         // Pre-select edition when clicking pricing card buttons
         function selectPlan(edition) {
             setTimeout(() => {
@@ -1233,8 +1399,12 @@
             }, 100);
         }
 
-        // Format order email
-        function prepareOrderEmail() {
+        // Validate and submit order form
+        function validateAndSubmitOrder() {
+            if (!validateBotProtection('order-website', 'order-captcha', orderCaptchaAnswer, 'order-error')) {
+                return false;
+            }
+
             const name = document.getElementById('order-name').value;
             const email = document.getElementById('order-email').value;
             const company = document.getElementById('order-company').value;
@@ -1268,8 +1438,50 @@ ${notes || 'None'}
 Submitted via sandhamadams.com`;
 
             window.location.href = `mailto:gsandham@sandhamadams.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Regenerate CAPTCHA after submission
+            orderCaptchaAnswer = generateCaptcha('order-captcha-question');
+            document.getElementById('order-captcha').value = '';
+
             return false;
         }
+
+        // Validate and submit contact form
+        function validateAndSubmitContact() {
+            if (!validateBotProtection('contact-website', 'contact-captcha', contactCaptchaAnswer, 'contact-error')) {
+                return false;
+            }
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const company = document.getElementById('company').value;
+            const message = document.getElementById('message').value;
+
+            const subject = `Website Inquiry from ${name}`;
+            const body = `NEW CONTACT MESSAGE
+
+From: ${name}
+Email: ${email}
+Company: ${company || 'Not provided'}
+
+Message:
+--------
+${message}
+
+---
+Submitted via sandhamadams.com`;
+
+            window.location.href = `mailto:gsandham@sandhamadams.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Regenerate CAPTCHA after submission
+            contactCaptchaAnswer = generateCaptcha('contact-captcha-question');
+            document.getElementById('contact-captcha').value = '';
+
+            return false;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initCaptchas);
     </script>
 </body>
 </html>
