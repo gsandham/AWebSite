@@ -1410,7 +1410,7 @@
             <div class="order-form-container" id="order-form">
                 <h3>Request Your <span style="background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Licenses</span></h3>
                 <p>Fill out the form below and we'll get back to you with a quote and next steps.</p>
-                <form class="order-form" action="mailto:gsandham@sandhamadams.com" method="post" enctype="text/plain" onsubmit="return validateAndSubmitOrder()">
+                <form class="order-form" id="order-form-element" action="#" method="post" enctype="text/plain" onsubmit="return validateAndSubmitOrder()">
                     <div id="order-error" class="error-message"></div>
                     <!-- Honeypot field - hidden from humans -->
                     <div class="hp-field" aria-hidden="true">
@@ -1580,7 +1580,7 @@
                             <div class="contact-icon">📧</div>
                             <div class="contact-item-content">
                                 <h4>Email</h4>
-                                <p><a href="mailto:gsandham@sandhamadams.com">gsandham@sandhamadams.com</a></p>
+                                <p><a href="#" class="email-link">Loading...</a></p>
                             </div>
                         </div>
 
@@ -1603,7 +1603,7 @@
                 </div>
 
                 <div class="contact-form">
-                    <form action="mailto:gsandham@sandhamadams.com" method="post" enctype="text/plain" onsubmit="return validateAndSubmitContact()">
+                    <form id="contact-form-element" action="#" method="post" enctype="text/plain" onsubmit="return validateAndSubmitContact()">
                         <div id="contact-error" class="error-message"></div>
                         <!-- Honeypot field - hidden from humans -->
                         <div class="hp-field" aria-hidden="true">
@@ -1662,7 +1662,7 @@
             <div class="footer-contact">
                 <h4>Contact Info</h4>
                 <p>Graham Sandham</p>
-                <p>gsandham@sandhamadams.com</p>
+                <p class="obfuscated-email">Loading...</p>
                 <p>416 225-2265</p>
                 <p style="margin-top: 15px;">600 Bay Street, Suite 502<br>Toronto, ON M5G 1M6</p>
             </div>
@@ -1673,6 +1673,29 @@
         </div>
     </footer>
     <script>
+        // Email obfuscation - prevents bots from scraping email
+        function getEmail() {
+            const parts = ['gsandham', 'sandhamadams', 'com'];
+            return parts[0] + '@' + parts[1] + '.' + parts[2];
+        }
+
+        // Initialize obfuscated email links and displays
+        function initEmail() {
+            const email = getEmail();
+            // Update email displays
+            document.querySelectorAll('.obfuscated-email').forEach(el => {
+                el.textContent = email;
+                if (el.tagName === 'A') {
+                    el.href = 'mailto:' + email;
+                }
+            });
+            // Update email links
+            document.querySelectorAll('.email-link').forEach(el => {
+                el.href = 'mailto:' + email;
+                el.textContent = email;
+            });
+        }
+
         // Bot protection - track page load time
         const pageLoadTime = Date.now();
         const MIN_FORM_TIME = 3000; // Minimum 3 seconds to fill form (bots are instant)
@@ -1804,7 +1827,7 @@ ${notes || 'None'}
 ---
 Submitted via sandhamadams.com`;
 
-            window.location.href = `mailto:gsandham@sandhamadams.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = `mailto:${getEmail()}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             // Regenerate CAPTCHA after submission
             orderCaptchaAnswer = generateCaptcha('order-captcha-question');
@@ -1838,7 +1861,7 @@ ${message}
 ---
 Submitted via sandhamadams.com`;
 
-            window.location.href = `mailto:gsandham@sandhamadams.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = `mailto:${getEmail()}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             // Regenerate CAPTCHA after submission
             contactCaptchaAnswer = generateCaptcha('contact-captcha-question');
@@ -1848,7 +1871,10 @@ Submitted via sandhamadams.com`;
         }
 
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initCaptchas);
+        document.addEventListener('DOMContentLoaded', function() {
+            initCaptchas();
+            initEmail();
+        });
     </script>
 </body>
 </html>
