@@ -3,7 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandham Adams Inc. | Microsoft Partner - Business Central Consulting</title>
+    <title>Sandham Adams Inc. | Microsoft Partner - Business Central Consulting Toronto</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sandham Adams Inc. is a Microsoft Partner specializing in Dynamics 365 Business Central consulting, implementation, licensing, and support for small to medium businesses in Toronto and across Canada.">
+    <meta name="keywords" content="Business Central licenses, buy Business Central, Business Central pricing, Microsoft Business Central, Dynamics 365, ERP consulting, Business Central implementation, Business Central licensing, Microsoft Partner Toronto, ERP solutions Canada, Business Central support, small business ERP, Sandham Adams, Microsoft Dynamics NAV, Navision, NAV consultants Toronto, NAV to Business Central upgrade, Dynamics NAV partner, ERP consultants Toronto">
+    <meta name="author" content="Sandham Adams Inc.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.sandhamadams.com/">
+
+    <!-- Geographic/Local SEO -->
+    <meta name="geo.region" content="CA-ON">
+    <meta name="geo.placename" content="Toronto">
+    <meta name="geo.position" content="43.6532;-79.3832">
+    <meta name="ICBM" content="43.6532, -79.3832">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sandhamadams.com/">
+    <meta property="og:title" content="Sandham Adams Inc. | Microsoft Partner - Business Central Consulting">
+    <meta property="og:description" content="Expert Microsoft Dynamics 365 Business Central consulting, implementation, and licensing for small to medium businesses.">
+    <meta property="og:image" content="https://www.sandhamadams.com/SandhamAdamsLogo.jpg">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sandham Adams Inc. | Microsoft Partner - Business Central Consulting">
+    <meta name="twitter:description" content="Expert Microsoft Dynamics 365 Business Central consulting, implementation, and licensing for small to medium businesses.">
+    <meta name="twitter:image" content="https://www.sandhamadams.com/SandhamAdamsLogo.jpg">
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Sandham Adams Inc.",
+        "description": "Microsoft Partner specializing in Dynamics 365 Business Central consulting, implementation, and licensing.",
+        "url": "https://www.sandhamadams.com",
+        "logo": "https://www.sandhamadams.com/SandhamAdamsLogo.jpg",
+        "telephone": "+1-416-225-2265",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "600 Bay Street, Suite 502",
+            "addressLocality": "Toronto",
+            "addressRegion": "ON",
+            "postalCode": "M5G 1M6",
+            "addressCountry": "CA"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 43.6532,
+            "longitude": -79.3832
+        },
+        "areaServed": ["Toronto", "Ontario", "Canada"],
+        "serviceType": ["ERP Consulting", "Business Central Implementation", "Microsoft Licensing", "Business Software Support"],
+        "priceRange": "$$"
+    }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -1056,6 +1113,39 @@
             font-weight: 500;
         }
 
+        /* Human confirmation checkbox */
+        .human-check {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #86efac;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .human-check:hover {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: #4ade80;
+        }
+
+        .human-check input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: var(--success);
+        }
+
+        .human-check label {
+            cursor: pointer;
+            font-weight: 600;
+            color: #166534;
+            margin: 0;
+        }
+
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-10px); }
@@ -1087,8 +1177,8 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
             position: relative;
             z-index: 1;
         }
@@ -1263,6 +1353,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#energy-payments">Energy Payments</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -1468,6 +1559,10 @@
                             <input type="text" id="order-captcha" name="captcha" class="captcha-input" required placeholder="?" autocomplete="off">
                         </div>
                     </div>
+                    <div class="human-check">
+                        <input type="checkbox" id="order-human" name="human" required>
+                        <label for="order-human">I confirm I am a human submitting this form</label>
+                    </div>
                     <button type="submit" class="order-submit">Submit Order Request</button>
                 </form>
             </div>
@@ -1556,6 +1651,92 @@
         </div>
     </section>
 
+    <!-- Energy Payments Section -->
+    <section id="energy-payments" style="background: linear-gradient(180deg, white 0%, var(--bg-light) 100%);">
+        <div class="container">
+            <h2 class="section-title">Payment Integration for <span>Business Central</span></h2>
+            <p class="section-subtitle">Energy Payments — our certified extension on Microsoft AppSource that brings modern payment processing directly into Microsoft Dynamics 365 Business Central.</p>
+
+            <div class="services-grid" style="margin-top: 20px;">
+                <div class="service-card">
+                    <div class="service-icon">💳</div>
+                    <h3>Credit &amp; Debit Cards</h3>
+                    <p>Visa, MasterCard, American Express, and Discover — including Visa Debit and MasterCard Debit — processed securely through a hosted tokenization iframe.</p>
+                    <ul>
+                        <li>Charge on invoice post</li>
+                        <li>Charge from customer ledger</li>
+                        <li>Full and partial refunds</li>
+                        <li>Void / same-day reversal</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Secure Card Vault</h3>
+                    <p>Tokenized card storage so customers pay repeatedly without re-entering card details. Cardholder data never touches your Business Central tenant.</p>
+                    <ul>
+                        <li>Multiple cards per customer</li>
+                        <li>Default-card management</li>
+                        <li>Hosted card entry (SAQ-A scope)</li>
+                        <li>No PCI burden on your team</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⏸️</div>
+                    <h3>Pre-Authorizations</h3>
+                    <p>Reserve funds on a customer's card and capture later — or void if not needed. Applied automatically at charge time if an open pre-auth exists.</p>
+                    <ul>
+                        <li>Reserve funds with a reason</li>
+                        <li>Capture on invoice post</li>
+                        <li>Void unused pre-auths</li>
+                        <li>Expiry tracking (7 days)</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Surcharging</h3>
+                    <p>Per-card-type surcharges (Visa 4%, Amex 5%, etc.) that flow through the customer ledger properly — not just a GL entry. Debit cards excluded automatically to stay compliant with Canadian card brand rules.</p>
+                    <ul>
+                        <li>Configurable by card brand</li>
+                        <li>Debit-safe (no surcharge on debit)</li>
+                        <li>Reversed automatically on refund</li>
+                        <li>Bilingual receipts</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🍁</div>
+                    <h3>Built for Canada</h3>
+                    <p>Fully bilingual (English Canadian and French Canadian) from day one. Canadian-focused payment rails and compliance. Made for the Canadian Business Central market.</p>
+                    <ul>
+                        <li>EN-CA and FR-CA UI</li>
+                        <li>Bilingual manuals</li>
+                        <li>Quebec Law 25 privacy compliant</li>
+                        <li>PIPEDA compliant</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>AppSource Distribution</h3>
+                    <p>Certified by Microsoft and distributed through Microsoft AppSource. Install directly into your Business Central tenant — no separate deployment or hosting.</p>
+                    <ul>
+                        <li>One-click install</li>
+                        <li>Automatic updates</li>
+                        <li>Bank-account / EFT support (roadmap)</li>
+                        <li>Recurring subscriptions (roadmap)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="#contact" class="btn btn-primary">Get in touch about Energy Payments</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -1634,6 +1815,10 @@
                                 <input type="text" id="contact-captcha" name="captcha" class="captcha-input" required placeholder="?" autocomplete="off">
                             </div>
                         </div>
+                        <div class="human-check">
+                            <input type="checkbox" id="contact-human" name="human" required>
+                            <label for="contact-human">I confirm I am a human submitting this form</label>
+                        </div>
                         <button type="submit" class="form-submit">Send Message</button>
                     </form>
                 </div>
@@ -1655,7 +1840,18 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#energy-payments">Energy Payments</a></li>
                     <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="refund-policy.html">Refund Policy</a></li>
+                    <li><a href="EnergyPaymentEULA.pdf">Energy Payments EULA</a></li>
                 </ul>
             </div>
 
@@ -1694,6 +1890,54 @@
                 el.href = 'mailto:' + email;
                 el.textContent = email;
             });
+        }
+
+        // Human activity tracking - bots don't move mouse or type naturally
+        let humanActivityScore = 0;
+        let mouseMovements = 0;
+        let keystrokes = 0;
+
+        document.addEventListener('mousemove', function() {
+            mouseMovements++;
+            if (mouseMovements >= 5) humanActivityScore = Math.min(humanActivityScore + 1, 10);
+        });
+
+        document.addEventListener('keydown', function() {
+            keystrokes++;
+            if (keystrokes >= 3) humanActivityScore = Math.min(humanActivityScore + 1, 10);
+        });
+
+        // Check for human-like activity
+        function hasHumanActivity() {
+            return mouseMovements >= 5 && keystrokes >= 3;
+        }
+
+        // Rate limiting - prevent rapid submissions
+        const RATE_LIMIT_KEY = 'sa_form_submissions';
+        const RATE_LIMIT_MAX = 3; // Max submissions per hour
+        const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+
+        function checkRateLimit() {
+            try {
+                const data = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '{"submissions":[]}');
+                const now = Date.now();
+                // Filter out old submissions
+                data.submissions = data.submissions.filter(time => now - time < RATE_LIMIT_WINDOW);
+                localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(data));
+                return data.submissions.length < RATE_LIMIT_MAX;
+            } catch (e) {
+                return true; // Allow if localStorage fails
+            }
+        }
+
+        function recordSubmission() {
+            try {
+                const data = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '{"submissions":[]}');
+                data.submissions.push(Date.now());
+                localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(data));
+            } catch (e) {
+                // Silently fail if localStorage unavailable
+            }
         }
 
         // Bot protection - track page load time
@@ -1746,8 +1990,15 @@
             document.getElementById(elementId).style.display = 'none';
         }
 
-        // Validate bot protection (honeypot + time + captcha)
+        // Validate bot protection (honeypot + time + captcha + activity + rate limit)
         function validateBotProtection(honeypotId, captchaId, captchaAnswer, errorId) {
+            // Check rate limit first
+            if (!checkRateLimit()) {
+                console.log('Rate limit exceeded');
+                showError(errorId, 'Too many submissions. Please try again later.');
+                return false;
+            }
+
             // Check honeypot (bots fill this in, humans don't see it)
             const honeypot = document.getElementById(honeypotId);
             if (honeypot && honeypot.value !== '') {
@@ -1764,6 +2015,13 @@
                 return false;
             }
 
+            // Check for human-like activity (mouse movement + keystrokes)
+            if (!hasHumanActivity()) {
+                console.log('Bot detected: no human activity');
+                showError(errorId, 'Please interact with the form before submitting.');
+                return false;
+            }
+
             // Check CAPTCHA
             const userAnswer = parseInt(document.getElementById(captchaId).value, 10);
             if (isNaN(userAnswer) || userAnswer !== captchaAnswer) {
@@ -1777,6 +2035,9 @@
                 document.getElementById(captchaId).value = '';
                 return false;
             }
+
+            // Record this submission for rate limiting
+            recordSubmission();
 
             hideError(errorId);
             return true;
